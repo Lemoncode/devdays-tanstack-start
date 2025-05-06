@@ -1,0 +1,15 @@
+{
+  "name": "01-defining-routes",
+  "workspaces": [
+    "using-react-router",
+    "using-tanstack-router"
+  ],
+  "scripts": {
+    "start": "run-p start:*",
+    "start:react-router": "npm start -w using-react-router",
+    "start:tanstack-router": "npm start -w using-tanstack-router"
+  },
+  "devDependencies": {
+    "npm-run-all": "^4.1.5"
+  }
+}
