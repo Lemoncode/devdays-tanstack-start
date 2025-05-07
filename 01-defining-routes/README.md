@@ -30,7 +30,9 @@ Pero, para definir las rutas, si usamos la forma recomendada de hacerlo, vamos a
 
 Pero fijaros que en cuanto añadimos el punto de entrada `__root.tsx`, automáticamente nos añade un código de ejemplo para poder empezar a trabajar.
 
-Por ejemplo, añadiendo aquí el `layout` de la aplicación:
+Por ejemplo, añadimos aquí el `layout` de la aplicación:
+
+- El componente `Outlet` mostrará el contenido de las rutas que se vayan mostrando.
 
 _./src/routes/\_\_root.tsx_
 
