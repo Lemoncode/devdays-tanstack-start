@@ -158,7 +158,7 @@ export const Navbar = () => {
         ...
 ```
 
-¿Dónde esta el truco? Esto es porque tenemos instalado el plugin de [TanStack Router](https://tanstack.com/router/latest/docs/framework/react/quick-start#configure-the-vite-plugin) que se encarga de crear y mantener el fichero `routeTree.gen.ts` donde va apuntando todas las rutas que vamos añadiendo, cambiando o eliminando. Y éste lo usamos en la instancia del [router](./using-tanstack-router/src/router/router.ts) para que todo este tipado.
+¿Dónde esta el truco? Esto es porque tenemos instalado el plugin de [TanStack Router](https://tanstack.com/router/latest/docs/framework/react/quick-start#configure-the-vite-plugin) que se encarga de crear y mantener el fichero `routeTree.gen.ts` donde va apuntando todas las rutas que vamos añadiendo, cambiando o eliminando. Y éste lo usamos en la instancia del [router](./using-tanstack-router/src/common/router.ts) para que todo este tipado.
 
 Este fichero como se genera automáticamente, a veces puede que se quede mal formateado, pero puedes añadir una [configuración del VsCode](../.vscode/settings.json) para que esto casi no ocurra e incluso hacerlo de solo lectura y que nadie pueda tocarlo.
 
@@ -172,8 +172,8 @@ _./src/components/post-list.component.tsx_
 
 ```diff
 + import { useNavigate } from "@tanstack/react-router";
-import type * as model from "../model.ts";
-import { posts } from "../mock-data.ts";
+import type * as model from "#common/model.ts";
+import { posts } from "#common/mock-data.ts";
 
 export const PostList = () => {
 + const navigate = useNavigate();
@@ -211,7 +211,7 @@ _./src/components/post.component.tsx_
 
 ```diff
 + import { useParams } from "@tanstack/react-router";
-import { posts } from "../mock-data";
+import { posts } from "#common/mock-data";
 
 export const Post = () => {
 + const { postId } = useParams({ from: "/posts/$postId" });
