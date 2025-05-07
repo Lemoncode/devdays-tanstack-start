@@ -1,5 +1,5 @@
-import type * as model from "../model.ts";
-import { posts } from "../mock-data.ts";
+import type * as model from "#common/model.ts";
+import { posts } from "#common/mock-data.ts";
 
 export const PostList = () => {
   return (

@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router";
-import { routes } from "#router";
-import type * as model from "../model.ts";
-import { posts } from "../mock-data.ts";
+import { routes } from "#common/router";
+import type * as model from "#common/model";
+import { posts } from "#common/mock-data";
 
 export const PostList = () => {
   const navigate = useNavigate();

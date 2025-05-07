@@ -1,5 +1,5 @@
 import { useParams } from "react-router";
-import { posts } from "../mock-data";
+import { posts } from "#common/mock-data";
 
 export const Post = () => {
   const { postId } = useParams<{ postId: string }>();

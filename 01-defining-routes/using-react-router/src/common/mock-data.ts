@@ -1,4 +1,5 @@
 import * as model from "./model";
+
 export const posts: model.Post[] = [
   {
     id: 1,

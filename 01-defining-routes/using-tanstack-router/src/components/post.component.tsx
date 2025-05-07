@@ -1,4 +1,4 @@
-import { posts } from "../mock-data";
+import { posts } from "#common/mock-data";
 
 export const Post = () => {
   const post = posts.find((post) => post.id === Number(""));

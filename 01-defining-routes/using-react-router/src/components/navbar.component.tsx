@@ -1,6 +1,6 @@
 import type React from "react";
 import { Link } from "react-router";
-import { routes } from "#router";
+import { routes } from "#common/router";
 
 export const Navbar = () => {
   return (
