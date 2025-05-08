@@ -1,6 +1,6 @@
 import { useParams } from "@tanstack/react-router";
 import { useSuspenseQuery } from "@tanstack/react-query";
-import * as api from "#common/post.api";
+import * as api from "#common/api.ts";
 
 export const Post = () => {
   const { postId } = useParams({ from: "/posts/$postId" });

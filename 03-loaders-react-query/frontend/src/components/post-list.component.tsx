@@ -1,6 +1,6 @@
 import { useNavigate } from "@tanstack/react-router";
 import { useSuspenseQuery } from "@tanstack/react-query";
-import * as api from "#common/post.api";
+import * as api from "#common/api.ts";
 import type * as model from "#common/model";
 
 export const PostList = () => {
