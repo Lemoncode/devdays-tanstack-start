@@ -1,5 +1,5 @@
 {
-  "name": "03-loaders-react-query",
+  "name": "05-lazy",
   "workspaces": [
     "api",
     "frontend"

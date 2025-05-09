@@ -1,5 +1,5 @@
 {
-  "name": "04-before-load",
+  "name": "06-tanstack-start",
   "workspaces": [
     "api",
     "frontend"
