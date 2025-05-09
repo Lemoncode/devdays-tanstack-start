@@ -32,7 +32,7 @@ Pero fijaros que en cuanto añadimos el punto de entrada `__root.tsx`, automáti
 
 Por ejemplo, añadimos aquí el `layout` de la aplicación:
 
-- El componente `Outlet` mostrará el contenido de las rutas que se vayan mostrando.
+- El componente `Outlet` mostrará el contenido de las rutas hijas.
 
 _./src/routes/\_\_root.tsx_
 
