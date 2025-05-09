@@ -4,7 +4,7 @@ import { routes } from "#common/router";
 
 export const Navbar = () => {
   return (
-    <nav className="navbar bg-primary text-primary-content shadow-sm sticky top-0 z-50">
+    <nav className="navbar bg-accent text-accent-content shadow-sm sticky top-0 z-50">
       <div className="navbar-start">
         <Menu>
           <li>
@@ -74,7 +74,7 @@ const Menu: React.FC<React.PropsWithChildren> = (props) => {
       </div>
       <ul
         tabIndex={0}
-        className="menu menu-sm dropdown-content bg-primary-content text-primary font-bold z-1 w-52 p-2 shadow rounded-box"
+        className="menu menu-sm dropdown-content bg-accent-content text-accent font-bold z-1 w-52 p-2 shadow rounded-box"
       >
         {children}
       </ul>
