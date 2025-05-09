@@ -116,6 +116,8 @@ export const Route = createFileRoute('/posts/$postId')({
 - }
 ```
 
+> Si se quiere otro parametro en la misma ruta separar por puntos. Ejemplo: `$postId.$another.tsx`
+
 Ahora si yo me voy al [Navbar](./using-tanstack-router/src/components/navbar.component.tsx) y quiero utilizar las rutas en el component `Link`:
 
 - Tengo `intellisense` en la propiedad `to` de las rutas que hemos definido.
