@@ -6,6 +6,7 @@ export interface Auth {
   user: string | null;
   login: (email: string, password: string) => Promise<void>;
   logout: () => Promise<void>;
+  fetchAuthUser: () => Promise<void>;
 }
 
 export const auth: Auth = {
@@ -21,6 +22,12 @@ export const auth: Auth = {
     await api.logout();
     auth.isAuthenticated = false;
     auth.user = null;
+    storage.set(auth);
+  },
+  fetchAuthUser: async () => {
+    const user = await api.getAuthUser();
+    auth.user = user;
+    auth.isAuthenticated = !!user;
     storage.set(auth);
   },
 };

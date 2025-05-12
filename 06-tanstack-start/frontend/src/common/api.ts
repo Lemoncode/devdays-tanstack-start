@@ -17,6 +17,9 @@ export const logout = async (): Promise<void> => {
   await fetch(`${API_URL}/logout`, { method: "POST" });
 };
 
+export const getAuthUser = async (): Promise<string | null> =>
+  fetch(`${API_URL}/auth-user`).then((response) => response.json());
+
 const getPosts = async (): Promise<model.Post[]> =>
   await fetch(`${API_URL}/posts`).then((res) => res.json());
 

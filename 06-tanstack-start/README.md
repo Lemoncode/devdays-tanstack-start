@@ -1,32 +1,24 @@
 # Tanstack Start
 
-Ahora le toca el turno a [`Tanstack Start`](https://tanstack.com/start/latest), que es el framework para transformar nuestra aplicación en una de `Server Side Rendering` (ojo que por ahora esta en `beta` y para React y para Solid).
+Si arrancamos el proyecto, vemos que utiliza `vinxi` (aunque en la versión release lo van a sustituir por un `plugin` de `vite`)
 
-## Instalación
+Si abrimos las DevTools del navegador y cargamos la primera página, vemos que directamente viene un `html` con el contenido de ésta.
 
-Las librerías que ahora necesitamos, a parte de la del router que ya tenemos instalada, son:
+Si hacemos `login` y navegamos vemos que ahora hace la descarga con las rutas `lazy` como si fuese una SPA normal.
 
-```bash
-npm install @tanstack/react-start
-npm install -D vinxi
+Pero si recargamos la página, vemos que vuelve a hacer la descarga del `html` completo aunque no sea la del `login`.
 
-```
+Así cumplimos con el SEO y mantenemos lo bueno de una SPA.
 
-> Vinxi es un SDK para crear tu propio framework como `Tanstack Start`, `Next.js`, etc. con tus propias reglas y está basado en `Vite`, `Nitro` y `Rollup`.
->
-> Pero comentan que Vinxi la eliminarán en la versión 1 y lo sustituirán por un `plugin` de `Vite` o directamente con el `CLI`.
-
-¿Qué dependencias no necesitamos ahora?
-
-```bash
-npm uninstall vite @vitejs/plugin-react @tanstack/router-plugin
-```
-
-> No necesitamos estas porque ya están incluidas en `Tanstack Start`.
+> Podemos poner breakpoint en el VSCode y en el navegador.
 
 ## Configuración
 
-Es decir, ahora necesitamos hacer unos pequeños ajustes para que nuestra aplicación funcione con `SSR`.
+Para configurar todo esto, necesitamos hacer unos pequeños ajustes:
+
+### package.json
+
+- Instalamos `@tanstack/react-start` y `vinxi`, ya tienen integrados `vite` y el `plugin` del router.
 
 _./frontend/package.json_
 
@@ -40,38 +32,11 @@ _./frontend/package.json_
   },
 ```
 
-Renombramos el fichero `vite.config.ts` a `app.config.ts`.
+### app.config.ts
 
-- Ahora `defineConfig` lo importamos de `@tanstack/react-start/config`.
-- Los plugins de `react` y el `router` ya no los necesitamos, porque ya están incluidos, y el router se puede configurar en la propiedad `tsr` (TanStack Router).
-- Eso si, le añadimos la propiedad `appDirectory` a `src` para que sepa donde está nuestra aplicación (por defecto es `app`).
-- Y la configuración restante, en la propia de `vite`.
+Renombramos el fichero `vite.config.ts` a `app.config.ts` y como veis la configuración es muy parecida, y sigue soportando la configuración de `vite`.
 
-_./frontend/vite.config.ts_
-
-```diff
-- import { defineConfig } from "vite";
-+ import { defineConfig } from "@tanstack/react-start/config";
-- import react from "@vitejs/plugin-react";
-- import { TanStackRouterVite } from "@tanstack/router-plugin/vite";
-...
-
-export default defineConfig({
-- plugins: [
--   TanStackRouterVite({ target: "react", autoCodeSplitting: true }),
--   tailwindcss(),
--   react(),
-- ],
-+ tsr: {
-+   target: "react",
-+   autoCodeSplitting: true,
-+   appDirectory: "src",
-+ },
-+ vite: {
-+   plugins: [tailwindcss()],
-+ },
-});
-```
+### router config
 
 Con respecto a la instancia del router, la tenemos que exponer en forma de función porque se va a utilizar en servidor y en cliente:
 
@@ -97,9 +62,11 @@ declare module "@tanstack/react-router" {
 }
 ```
 
-Eso significa, que ahora vamos a tener 2 puntos de entrada: uno para el cliente y otro para el servidor.
+### ssr.tsx
 
-El de servidor `ssr.tsx`:
+Eso significa, que ahora vamos a tener 2 puntos de entrada:
+
+Uno para el servidor `ssr.tsx`:
 
 - Importamos la funcion de `createRouter` y se la pasamos al `createStartHandler` que será el encargado de manejar las peticiones según la ruta que se solicite.
 - También importamos la función `getRouterManifest` que se encargará de gestionar los recursos y `preloads` de la aplicación.
@@ -122,7 +89,9 @@ export default createStartHandler({
 })(defaultStreamHandler);
 ```
 
-Para la parte de cliente:
+### client.tsx
+
+Y otro para el cliente (`client.tsx`):
 
 - Al igual que antes, importamos la función `createRouter`.
 - Creamos la instancia, y se la pasamos al componente `StartClient` que es el encargado de manejar las peticiones en cliente.
@@ -140,9 +109,13 @@ const router = createRouter();
 hydrateRoot(document, <StartClient router={router} />);
 ```
 
-Es decir, ahora nos sobran 2 ficheros: el `index.html` y el `index.tsx`. Tenemos que ir migrando el contenido.
+### Migración del index.html
 
-Ahora, el fichero principal de la aplicación tanto para el cliente como para el servidor es el `routes/__root.tsx`:
+Ahora nos sobran 2 ficheros: el `index.html` y el `index.tsx`. Para mover el código a un sitio común podríamos optar por el fichero principal del router `__root.tsx`:
+
+- Utilizar propiedad `head` del router para cambiar título y metadatos.
+- Añadimos la estructura básica de un `html` en el render.
+
 
 _./frontend/src/routes/\_\_root.tsx_
 
@@ -175,7 +148,7 @@ export const Route = createRootRouteWithContext<RouterContext>()({
 function RootComponent() {
   return (
 -   <>
-+   <html lang="en">
++   <html lang="en" data-theme="corporate">
 +     <head>
 +       <HeadContent />
 +     </head>
@@ -191,19 +164,17 @@ function RootComponent() {
 
 ```
 
-> Ya podemos borrar el `index.html`
+### Migración del index.tsx
 
-Vamos ahora con el `index.tsx`:
+Y para el `index.tsx`:
 
-- Nos llevamos los imports de los estilos, pero lo importamos como una URL para poder inyectarlos en el `head` del html como un `link` para que funcionen en modo servidor.
-- El `RouterProvider` es algo que ya está incluido en los puntos de entrada de servidor y cliente.
-- Pero si nos vamos a llevar la configuración de `react-query`. Si se necesita en un nivel superior, se puede usar [las propiedas `Wrap` o `InnerWrap` del router](https://tanstack.com/router/latest/docs/framework/react/api/router/RouterOptionsType#wrap-property)
-- Ya podemos borar el `index.tsx`.
+- Podemos importar los estilos, pero como un `link` de HTML para que funcionen en modo servidor.
+- Nos llevamos los proveedor necesarios (menos el del router que ya lo tiene incluido internamente),
+- Y ya estaría todo listo.
 
 _./frontend/src/routes/\_\_root.tsx_
 
 ```diff
-+ import appStyles from "../index.css?url";
 import {
   Outlet,
   createRootRouteWithContext,
@@ -256,6 +227,10 @@ function RootComponent() {
 
 > Nota: [CSS Modules FOUC (flash of unstyled content) se resolverá en la versión 1](https://github.com/TanStack/router/issues/3023#issuecomment-2689163745)
 
-Ahora, sea cual sea la ruta que solicitemos inicialmente, se renderizará en servidor. Y las navegaciones posteriores se harán en cliente, con esto tenemos lo mejor de ambos mundos, conseguimos una carga inicial rápida y mantenemos la interactividad de una SPA (con su memoria en cliente, etc).
+### Otros cambios
 
-> Podemos poner breakpoint en el VSCode y en el navegador.
+Eso si, si tienes código como por ejemplo lo que yo he añadido del [localStorage](./frontend/src/common/storage.ts) tendrás que comprobar si se ejecuta en cliente o servidor. 
+
+### Conclusión
+
+A partir de aquí ya tenemos una aplicación con `SSR` y te puedes aprovechar las nuevas características que te da de `Server Functions`, `API Routes`, etc.
