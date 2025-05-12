@@ -29,10 +29,6 @@ app.post("/api/logout", async (context) => {
   return context.body(null, 204);
 });
 
-app.get("/api/auth-user", async (context) => {
-  return context.json(db.loggedUser);
-});
-
 app.get("/api/posts", async (context) => {
   return context.json(db.posts);
 });

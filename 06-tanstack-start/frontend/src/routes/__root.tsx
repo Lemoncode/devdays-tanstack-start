@@ -31,11 +31,6 @@ export const Route = createRootRouteWithContext<RouterContext>()({
       },
     ],
   }),
-  beforeLoad: async ({ context }) => {
-    if (!context.auth.isAuthenticated) {
-      await context.auth.fetchAuthUser();
-    }
-  },
   component: RootComponent,
 });
 

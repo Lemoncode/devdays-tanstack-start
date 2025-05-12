@@ -169,7 +169,6 @@ export const Route = createRootRouteWithContext<RouterContext>()({
 +     { title: "Using TanStack Start" },
 +   ],
 + }),
-  beforeLoad: async ({ context }) => {
  ...
 });
 
