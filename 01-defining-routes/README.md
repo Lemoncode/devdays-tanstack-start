@@ -1,5 +1,13 @@
 # Definiendo rutas
 
+La aplicación que he creado es muy simple, tiene:
+
+- Un navbar y footer común para todas las páginas.
+- Página de inicio
+- Lista de posts
+- Detalle de un post
+, pero nos sirve para comparar rápidamente 
+
 ## React Router
 
 Por un lado, tenemos React Router, que se convirtió en el estándar de facto para manejar rutas en aplicaciones React.
@@ -7,16 +15,16 @@ Por un lado, tenemos React Router, que se convirtió en el estándar de facto pa
 La forma de usarlo es muy simple:
 
 - Definimos un componente `Router` que contendrá todas nuestras rutas (podemos verlo en el fichero [./using-react-router/src/router/router.component.tsx](./using-react-router/src/common/router/router.component.tsx)).
-- Podemos tener un `Layout` que envuelva a todas nuestras, en este caso, porque el componente `Navbar` necesitamos que tenga acceso al router para navegar.
-- Y definimos cada una de nuestras rutas. En este caso tenemos `home`, `lista de post` y el `detalle de un post`.
+- Podemos tener un `Layout` que las envuelva a todas, en este caso, porque el componente `Navbar` necesitamos que tenga acceso al router para navegar.
+- Y definimos cada una de nuestras rutas.
 
 Al ser tan simple, vas como una moto, pero nos hemos dado cuenta en proyectos reales que tienes que estar tirando de un [fichero de constantes para definir las rutas](./using-react-router/src/common/router/routes.ts).
 
-Veamos por ejemplo, en el [Navbar component](./using-react-router/src/components/navbar.component.tsx) como tenemos que estar utilizando las rutas porque no tenemos `intellisense` en el component `Link`.
+Veamos por ejemplo, en el [Navbar component](./using-react-router/src/components/navbar.component.tsx) como tenemos que estar utilizando las constantes porque no tenemos `intellisense` en el component `Link`.
 
 La de horas que hemos perdido cuando no teniamos este fichero de constantes y teniamos que estar cambiando las rutas buscando en la lupa del `VsCode` y ahora que ya las tenemos, podemos incluso usarlas en una navegación programática con el `useNavigate`, por ejemplo, en el [`PostList component`](./using-react-router/src/components/post-list.component.tsx) para navegar al detalle de un post.
 
-Pero claro, luego hay detalles donde a veces se queda un poco cojo, como el caso del [detalle de un post](./using-react-router/src/components/post.component.tsx). Tenemos el `useParams` que sirve para recuperar los parámetros de la URL (el id del post), nos permite tiparlo, pero es otra cosa más que tenemos que estar manteniendo, creando ficheros para el tipado de cada ruta que necesita parámetros y que cuadren estos tipos, con lo que hemos definido en [las constantes](./using-react-router/src/common/router/routes.ts) y en el [router component](./using-react-router/src/common/router/router.component.tsx), que además, en las últimas versiones de React Router no es necesario definir las rutas con todas las barras (todavía me acuerdo de cuando teniamos que poner `exact` en todos sitios para que no coincidiera varias rutas). Por lo tanto, si nos ponemos finos, aquí necesitariamos también otro fichero de constantes.
+Pero claro, luego hay detalles donde a veces se queda un poco cojo, como el caso del [detalle de un post](./using-react-router/src/components/post.component.tsx). Tenemos el `useParams` que sirve para recuperar los parámetros de la URL (el id del post), nos permite tiparlo, pero es otra cosa más que tenemos que estar manteniendo y que cuadren estos tipos, con lo que hemos definido en [las constantes](./using-react-router/src/common/router/routes.ts) y en el [router component](./using-react-router/src/common/router/router.component.tsx), que además, en las últimas versiones de React Router no es necesario definir las rutas con todas las barras (todavía me acuerdo de cuando teniamos que poner `exact` en todos sitios para que no coincidiera varias rutas). Por lo tanto, si nos ponemos finos, aquí necesitariamos también otras constantes.
 
 ## TanStack Router
 
