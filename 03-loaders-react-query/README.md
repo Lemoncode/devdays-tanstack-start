@@ -1,6 +1,6 @@
 # Loaders con React Query
 
-Como la caché de React Router es muy básica, porque por ejemplo no tiene nada implementado para mutaciones ni `updates optimistas` se puede combinar con React Query u otra librería similar.
+Como la caché de TanStack Router es muy básica, porque por ejemplo no tiene nada implementado para mutaciones ni `updates optimistas` se puede combinar con React Query u otra librería similar.
 
 Los cambios son mínimos:
 
