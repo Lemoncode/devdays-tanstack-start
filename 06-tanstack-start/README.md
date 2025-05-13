@@ -1,8 +1,6 @@
 # Tanstack Start
 
-Si arrancamos el proyecto, vemos que utiliza `vinxi` (aunque en la versión release lo van a sustituir por un `plugin` de `vite`)
-
-Si abrimos las DevTools del navegador y cargamos la primera página, vemos que directamente viene un `html` con el contenido de ésta.
+Si arrancamos el proyecto y abrimos las `DevTools` del navegador y cargamos la primera página, vemos que directamente viene un `html` con el contenido de ésta.
 
 Si hacemos `login` y navegamos vemos que ahora hace la descarga con las rutas `lazy` como si fuese una SPA normal.
 
@@ -18,7 +16,10 @@ Para configurar todo esto, necesitamos hacer unos pequeños ajustes:
 
 ### package.json
 
-- Instalamos `@tanstack/react-start` y `vinxi`, ya tienen integrados `vite` y el `plugin` del router.
+- Instalamos `@tanstack/react-start`, ya tiene integrados `vite` y el `plugin` del router.
+-  Y `vinxi` para arrancar el server.
+
+> (aunque en la versión release lo van a sustituir por un `plugin` de `vite`)
 
 _./frontend/package.json_
 

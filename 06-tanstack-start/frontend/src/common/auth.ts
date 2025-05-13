@@ -27,7 +27,7 @@ export const auth: Auth = {
   fetchAuthUser: async () => {
     const user = await api.getAuthUser();
     auth.user = user;
-    auth.isAuthenticated = !!user;
+    auth.isAuthenticated = Boolean(user);
     storage.set(auth);
   },
 };
