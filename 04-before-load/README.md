@@ -15,8 +15,8 @@ Para implementarlo, la parte de autenticación la tenemos en la API Rest, pero e
 Esta información, la incluimos en el contexto del router [common/router.ts](./frontend/src/common/router.ts) para que todas las rutas lo tengan disponible.
 
 - Todas las rutas que teniamos antes, las hemos agrupado en una carpeta `_private` (lo que pongamos con `_` no lo va a incluir en la URL).
-- Y en el fichero `route.tsx` vemos que si no esta autenticado, lo redirigimos a la página de login y pillamos el valor de la ruta que quiere ir.
-- Además, aprovechamos este fichero, para tener un layout común para las rutas hijas.
+- Y en el fichero `route.tsx` vemos que si no esta autenticado, lo redirigimos a la página de login y pillamos el valor de la ruta deseada.
+- Además, aprovechamos este fichero, para tener ese layout común.
 
 - Por otro lado, en la página de login, definimos el query param `redirect`, por lo que vamos a tener intesillense de este párametro cuando naveguemos a esta ruta.
 - Si está autenticado, lo redirigimos a donde diga el parámetro.
