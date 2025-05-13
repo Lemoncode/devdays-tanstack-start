@@ -11,7 +11,7 @@ A partir de aquí, utiliza el patrón SWR (Stale While Revalidate). Es decir, ya
 
 Con lo cual, tengo al usuario siempre viendo algo que no sea un spinner dando vueltas.
 
-Estos datos en caché por defecto está configurado para que se consideren antiguos nada más consumirlos. Es decir, si miramos las `Router DevTools` vemos que el `staleTime` es 0 lo que significa que cada vez que navego a la ruta, siempre va a volver a lanzar la petición a la API mientras te muestra lo antiguo.
+La caché por defecto está configurada para que se consideren los datos antiguos nada más consumirlos. Es decir, si miramos las `Router DevTools` vemos que el `staleTime` es 0 lo que significa que cada vez que navego a la ruta, siempre va a volver a lanzar la petición a la API mientras te muestra lo antiguo.
 
 > `age` el tiempo que tienen los datos que se están mostrando.
 >
