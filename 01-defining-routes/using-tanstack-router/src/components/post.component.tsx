@@ -1,7 +1,7 @@
 import { posts } from "#common/mock-data";
 
 export const Post = () => {
-  const post = posts.find((post) => post.id === Number(""));
+  const post = posts.find((post) => post.id === Number("1"));
 
   return (
     <div className="hero bg-base-200 h-full">
