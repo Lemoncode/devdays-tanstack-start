@@ -9,7 +9,7 @@ Y la página principal:
 
 - `home.component`
 
-Y si cargamos la página de posts, se descarga solamente los ficheros necesarios.
+Y si cargamos la página de posts, se descarga solamente los ficheros necesarios y hace la llamada a la API para los datos.
 
 Lo mismo ocurre con el detalle del post.
 
