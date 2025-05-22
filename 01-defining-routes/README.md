@@ -6,7 +6,8 @@ La aplicación que he creado es muy simple, tiene:
 - Página de inicio
 - Lista de posts
 - Detalle de un post
-, pero nos sirve para comparar rápidamente 
+
+pero nos sirve para comparar rápidamente las dos tecnologías.
 
 ## React Router
 
@@ -24,7 +25,9 @@ Veamos por ejemplo, en el [Navbar component](./using-react-router/src/components
 
 La de horas que hemos perdido cuando no teniamos este fichero de constantes y teniamos que estar cambiando las rutas buscando en la lupa del `VsCode` y ahora que ya las tenemos, podemos incluso usarlas en una navegación programática con el `useNavigate`, por ejemplo, en el [`PostList component`](./using-react-router/src/components/post-list.component.tsx) para navegar al detalle de un post.
 
-Pero claro, luego hay detalles donde a veces se queda un poco cojo, como el caso del [detalle de un post](./using-react-router/src/components/post.component.tsx). Tenemos el `useParams` que sirve para recuperar los parámetros de la URL (el id del post), nos permite tiparlo, pero es otra cosa más que tenemos que estar manteniendo y que cuadren estos tipos, con lo que hemos definido en [las constantes](./using-react-router/src/common/router/routes.ts) y en el [router component](./using-react-router/src/common/router/router.component.tsx), que además, en las últimas versiones de React Router no es necesario definir las rutas con todas las barras (todavía me acuerdo de cuando teniamos que poner `exact` en todos sitios para que no coincidiera varias rutas). Por lo tanto, si nos ponemos finos, aquí necesitariamos también otras constantes.
+Pero claro, luego hay detalles donde a veces se queda un poco cojo, como el caso del [detalle de un post](./using-react-router/src/components/post.component.tsx).
+
+Tenemos el `useParams` que sirve para recuperar los parámetros de la URL (el id del post), nos permite tiparlo, pero es otra cosa más que tenemos que estar manteniendo y que cuadren estos tipos, con lo que hemos definido en [las constantes](./using-react-router/src/common/router/routes.ts) y en el [router component](./using-react-router/src/common/router/router.component.tsx), que además, en las últimas versiones de React Router no es necesario definir las rutas con todas las barras (todavía me acuerdo de cuando teniamos que poner `exact` en todos sitios para que no coincidiera varias rutas). Por lo tanto, si nos ponemos finos, aquí necesitariamos también otras constantes.
 
 ## TanStack Router
 

@@ -21,8 +21,8 @@ export const createRouter = () =>
     defaultPreloadStaleTime: 0,
   });
 
-declare module "@tanstack/react-router" {
+declare module '@tanstack/react-router' {
   interface Register {
-    router: typeof createRouter;
+    router: ReturnType<typeof createRouter>;
   }
 }
